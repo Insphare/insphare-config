@@ -1,0 +1,27 @@
+{
+    "name": "insphare/config",
+    "type": "library",
+    "description": "Insphare config management",
+    "homepage": "https://github.com/Insphare/insphare-config/",
+    "keywords": ["insphare", "config"],
+    "license": "MIT",
+    "authors": [
+        {"name": "Manuel Will", "email": "info@insphare.de"}
+    ],
+    "require-dev": {
+    },
+	"repositories": [
+        {
+           "type": "git",
+           "url": "https://github.com/Insphare/insphare-base"
+        }
+    ],
+   "minimum-stability": "dev",
+   "require": {
+       "symfony/yaml": "2.6.6",
+       "insphare/base": "*"
+    },
+    "autoload": {
+       "files": ["bootstrap.php"]
+    }
+}

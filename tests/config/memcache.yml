@@ -1,0 +1,16 @@
+memcache: 1
+
+environment-dev:
+  memcache: 2
+
+environment-alpha:
+  memcache: 3
+
+environment-beta:
+  memcache: 4
+
+environment-testing:
+  memcache: 5
+
+environment-stable:
+  memcache: 6

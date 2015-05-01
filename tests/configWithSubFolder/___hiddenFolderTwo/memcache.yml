@@ -1,0 +1,16 @@
+memcache: __hidden-1
+
+environment-dev:
+  memcache: __hidden-2
+
+environment-alpha:
+  memcache: __hidden-3
+
+environment-beta:
+  memcache: __hidden-4
+
+environment-testing:
+  memcache: __hidden-5
+
+environment-stable:
+  memcache: __hidden-6

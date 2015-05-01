@@ -1,0 +1,19 @@
+memcache: 1-overwrite
+
+environment-dev:
+  memcache: 2-overwrite
+
+environment-alpha:
+  memcache: 3-overwrite
+
+environment-beta:
+  memcache: 4-overwrite
+
+environment-testing:
+  memcache: 5-overwrite
+
+environment-stable:
+  memcache: 6-overwrite
+
+environment-gamma:
+  memcache: gamma-overwrite
