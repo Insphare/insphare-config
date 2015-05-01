@@ -3,6 +3,7 @@ namespace Insphare\Config;
 
 use Insphare\Base\Exception;
 use Insphare\Base\DirectoryIterator;
+use Insphare\Base\ObjectContainer;
 
 class Configuration {
 
@@ -232,6 +233,31 @@ class Configuration {
 	public function get($key) {
 		$this->parse();
 		return isset(self::$config[(string)$key]) ? self::$config[(string)$key] : null;
+	}
+
+	/**
+	 * @param string $key
+	 * @return Comparison
+	 */
+	public function getComparison($key) {
+		return new Comparison($this->get($key));
+	}
+
+	/**
+	 * @param string $key
+	 * @return mixed
+	 */
+	public static function g($key) {
+		$object = new ObjectContainer();
+		return $object->getConfiguration()->get($key);
+	}
+
+	/**
+	 * @param string $key
+	 * @return Comparison
+	 */
+	public static function gc($key) {
+		return new Comparison(self::g($key));
 	}
 
 	/**

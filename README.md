@@ -9,6 +9,8 @@ One of the feature is the environment level support. You are able to customize y
 You can also add directories that overwrite the config values. There can be versioned but it is not required. For example for secret passwords.
 For an even easier use, you can add an identifier to mark up sub folders who contains overwrite config values.
 
+You can also compare config values directly.
+
 Get it started
 ===========
 
@@ -33,4 +35,16 @@ $configuration->addConfigPath(dirname(__DIR__) . '/secretConfigFolder');
 
 // use filename as index key
 $configuration->setUseFileNameAsKey(true);
+
+// get config by object
+$configuration->get('yourConfigKey');
+
+// get comparison by object
+$configuration->getComparison('yourConfigKey')->isEmpty();
+
+// get config by static call
+Configuration::g('yourConfigKey');
+
+// get comparison by static call
+$isEmpty = Configuration::gc('yourConfigKey')->isEmpty();
 ```

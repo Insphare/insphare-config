@@ -1,4 +1,5 @@
 memcache: 1-overwrite
+integer: 1
 
 environment-dev:
   memcache: 2-overwrite
