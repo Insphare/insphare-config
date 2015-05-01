@@ -9,7 +9,7 @@ One of the feature is the environment level support. You are able to customize y
 You can also add directories that overwrite the config values. There can be versioned but it is not required. For example for secret passwords.
 For an even easier use, you can add an identifier to mark up sub folders who contains overwrite config values.
 
-You can also compare config values directly.
+You can also compare config values by comparison object.
 
 Get it started
 ===========
