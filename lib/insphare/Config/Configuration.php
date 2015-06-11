@@ -253,6 +253,21 @@ class Configuration {
 	}
 
 	/**
+	 * This should not to be use.
+	 *
+	 * @param $key
+	 * @param $value
+	 * @throws Exception
+	 */
+	public static function reWrite($key, $value) {
+		if (!isset(self::$config[(string)$key])) {
+			throw new Exception('Config key: "' . $key . '" does not exists. There can only be overwritten when the key already is given.');
+		}
+
+		self::$config[(string)$key] = $value;
+	}
+
+	/**
 	 * @param string $key
 	 * @return Comparison
 	 */
