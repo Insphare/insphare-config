@@ -111,6 +111,13 @@ class Configuration {
 	 * Clears the config.
 	 */
 	public function clear() {
+		self::c();
+	}
+
+	/**
+	 *
+	 */
+	public function c() {
 		self::$config = [];
 	}
 
