@@ -117,7 +117,7 @@ class Configuration {
 	/**
 	 *
 	 */
-	public function c() {
+	public static function c() {
 		self::$config = [];
 	}
 
