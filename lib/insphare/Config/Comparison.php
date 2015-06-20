@@ -83,6 +83,20 @@ class Comparison {
 	}
 
 	/**
+	 * Search in Array-Key
+	 */
+	public function containsInKey($key) {
+		return (isset($this->mixed) && is_array($this->mixed) && array_key_exists($key, $this->mixed));
+	}
+
+	/**
+	 * Search in Array-Value
+	 */
+	public function contains($key) {
+		return (isset($this->mixed) && is_array($this->mixed) && array_search($key, $this->mixed));
+	}
+
+	/**
 	 * @param $value
 	 * @return bool
 	 */
