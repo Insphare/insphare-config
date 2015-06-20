@@ -391,4 +391,25 @@ class ComparisonTest extends PHPUnit_Framework_TestCase {
 			[$data, null, false],
 		];
 	}
+
+	/**
+	 * @dataProvider providerContains
+	 */
+	public function testContains($data, $key, $expectedBooleanValue) {
+		$this->assertSame($expectedBooleanValue, $this->getComparison($data)->contains($key));
+	}
+
+	/**
+	 * @return array
+	 */
+	public function providerContains() {
+		$data = ['admin' => 1, 'user' => 2, 'lol' => 'lal', 'hihi' => 1];
+		return [
+			[$data, 1, true],
+			[$data, 2, true],
+			[$data, 'lal', true],
+			[$data, 'lol', false],
+			[$data, null, false],
+		];
+	}
 }
