@@ -146,4 +146,29 @@ class ParseTest extends PHPUnit_Framework_TestCase {
 		$cfg = $config->get('memcache');
 		$this->assertSame($gamma . '-overwrite', $cfg);
 	}
+
+	/**
+	 * Ausgangssituration:
+	 * - Developement-Environment
+	 * - File-Default: Werte ohne Überschreibung
+	 * - File-Overwerite: Selbes File aber ohne "master-config" sondern nur Übrschreibungen.
+	 */
+	public function testHeredityTest() {
+		$config = new Configuration();
+		$config->clear();
+		$config->setStaging(Configuration::ENVIRONMENT_DEV);
+		$config->addConfigPath(dirname(__DIR__) . '/config-heredity-main');
+		$config->addConfigPath(dirname(__DIR__) . '/config-heredity-project-overwrite');
+		$this->assertSame('dev-route', $config->get('http.freeze.redirect'));
+		$this->assertSame('other-freeze-main', $config->get('http.other.freeze'));
+	}
+
+	public function testHeredityTestOtherStage() {
+		$config = new Configuration();
+		$config->clear();
+		$config->setStaging(Configuration::ENVIRONMENT_TESTING);
+		$config->addConfigPath(dirname(__DIR__) . '/config-heredity-main');
+		$config->addConfigPath(dirname(__DIR__) . '/config-heredity-project-overwrite');
+		$this->assertSame('lom-route', $config->get('http.freeze.redirect'));
+	}
 }

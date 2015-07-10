@@ -1,0 +1,6 @@
+http.freeze.redirect: 'lom-route'
+http.other.freeze: 'other-freeze-main'
+
+environment-dev:
+  http.freeze.redirect: 'dev-route'
+  other-values: x

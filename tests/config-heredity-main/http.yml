@@ -1,0 +1,4 @@
+http.freeze.redirect: 'main-route'
+
+environment-dev:
+  noch-was-anderes: y
