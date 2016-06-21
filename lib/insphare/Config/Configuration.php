@@ -132,6 +132,7 @@ class Configuration {
 
 	/**
 	 * @param string $stage
+	 *
 	 * @throws Exception
 	 */
 	public function setStaging($stage) {
@@ -148,7 +149,10 @@ class Configuration {
 	 * @param string $path
 	 */
 	private function sanitizePath(&$path) {
-		$path = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $path);
+		$path = str_replace(array(
+			'/',
+			'\\'
+		), DIRECTORY_SEPARATOR, $path);
 	}
 
 	/**
@@ -222,7 +226,10 @@ class Configuration {
 			return;
 		}
 
-		$callback = array($this, 'parseFiles');
+		$callback = array(
+			$this,
+			'parseFiles'
+		);
 		array_walk($this->configPath, $callback);
 		array_walk($this->overwritePath, $callback);
 
@@ -235,15 +242,18 @@ class Configuration {
 
 	/**
 	 * @param string $key
+	 *
 	 * @return null
 	 */
 	public function get($key) {
 		$this->parse();
+
 		return isset(self::$config[(string)$key]) ? self::$config[(string)$key] : null;
 	}
 
 	/**
 	 * @param string $key
+	 *
 	 * @return Comparison
 	 */
 	public function getComparison($key) {
@@ -252,10 +262,12 @@ class Configuration {
 
 	/**
 	 * @param string $key
+	 *
 	 * @return mixed
 	 */
 	public static function g($key) {
 		$object = new ObjectContainer();
+
 		return $object->getConfiguration()->get($key);
 	}
 
@@ -264,6 +276,7 @@ class Configuration {
 	 *
 	 * @param $key
 	 * @param $value
+	 *
 	 * @throws Exception
 	 */
 	public static function reWrite($key, $value) {
@@ -276,6 +289,7 @@ class Configuration {
 
 	/**
 	 * @param string $key
+	 *
 	 * @return Comparison
 	 */
 	public static function gc($key) {
@@ -283,24 +297,74 @@ class Configuration {
 	}
 
 	/**
+	 * @param string $key
+	 *
+	 * @return mixed
+	 */
+	public static function w($key) {
+		$object = new ObjectContainer();
+
+		return $object->getConfiguration()->walk($key);
+	}
+
+	/**
 	 * Get the config by walking.
+	 * Walk path. Returns null on wrong way.
 	 *
 	 * @param string $path
+	 *
 	 * @return mixed
 	 */
 	public function walk($path) {
 		$this->parse();
 
-		$path = explode($this->walkDelimiter, $path);
-		$config = self::$config;
-		foreach ($path as $key) {
-			if (!isset($config[$key])) {
-				return null;
-			}
-
-			$config = $config[$key];
+		// first try to check the origin value, have the most priority
+		if (isset(self::$config[(string)$path])) {
+			return self::$config[(string)$path];
 		}
 
-		return $config;
+		if (is_scalar($path)) {
+			$path = explode('.', $path);
+		}
+		$mxdData = self::$config;
+		try {
+			foreach ($path as $strComponent) {
+				if (is_array($mxdData)) {
+					$mxdData = isset($mxdData[$strComponent]) ? $mxdData[$strComponent] : null;
+				}
+				elseif (is_object($mxdData)) {
+					$strComponent = lcfirst(str_replace(" ", "", ucwords(strtr($strComponent, "_-", "  "))));
+					$mxdData = method_exists($mxdData, $strComponent) ? $mxdData->$strComponent() : null;
+				}
+				else {
+					// error on path
+					$mxdData = null;
+					break;
+				}
+			}
+		}
+		catch (\Exception $ex) {
+			$mxdData = null;
+		}
+
+		return $mxdData;
+	}
+
+	/**
+	 * @param string $key
+	 *
+	 * @return Comparison
+	 */
+	public function getComparisonWalk($key) {
+		return new Comparison($this->walk($key));
+	}
+
+	/**
+	 * @param string $key
+	 *
+	 * @return Comparison
+	 */
+	public static function wc($key) {
+		return new Comparison(self::w($key));
 	}
 }

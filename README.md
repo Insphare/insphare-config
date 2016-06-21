@@ -42,9 +42,21 @@ $configuration->get('yourConfigKey');
 // get comparison by object
 $configuration->getComparison('yourConfigKey')->isEmpty();
 
+// get config by static call and walking array path
+$configuration->walk('yourConfigKey');
+
+// get comparison by static call and walking array
+$configuration->getComparisonWalk('yourConfigKey')->isEmpty();
+
 // get config by static call
 Configuration::g('yourConfigKey');
 
 // get comparison by static call
 $isEmpty = Configuration::gc('yourConfigKey')->isEmpty();
+
+// get config by static call and walking array path
+Configuration::w('root.child1.configKey1.configKey2');
+
+// get comparison by static call and walking array
+Configuration::wc('root.child1.configKey1.configKey2')->isEmpty();
 ```

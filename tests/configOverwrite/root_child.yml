@@ -1,0 +1,13 @@
+root.child_1: 'root-child_1'
+root:
+  child:
+    1: 'real_root_child_1'
+    2: 'real_root_child_2'
+    3: 'real_root_child_3'
+
+environment-dev:
+  root:
+    child:
+      3: 'overwritten'
+      4: true
+      5: false
