@@ -272,6 +272,13 @@ class Configuration {
 	}
 
 	/**
+	 * @param array $data
+	 */
+	public static function injectConfigArray(array $data) {
+		self::$config = $data;
+	}
+
+	/**
 	 * @return mixed
 	 */
 	public static function plainFullConfig() {
