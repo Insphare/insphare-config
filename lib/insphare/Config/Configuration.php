@@ -272,6 +272,22 @@ class Configuration {
 	}
 
 	/**
+	 * @return mixed
+	 */
+	public static function plainFullConfig() {
+		$object = new ObjectContainer();
+		$object->getConfiguration()->get('load');
+		return $object->getConfiguration()->getPlainFullConfig();
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getPlainFullConfig() {
+		return self::$config;
+	}
+
+	/**
 	 * This should not to be use.
 	 *
 	 * @param $key
