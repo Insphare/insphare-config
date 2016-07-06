@@ -108,6 +108,25 @@ class Configuration {
 	}
 
 	/**
+	 *  Returns currently environment
+	 *
+	 * @return string
+	 */
+	public function getEnvironment() {
+		return $this->staging;
+	}
+
+	/**
+	 * Returns currently environment
+	 *
+	 * @return string
+	 */
+	public static function ge() {
+		$object = new ObjectContainer();
+		return $object->getConfiguration()->getEnvironment();
+	}
+
+	/**
 	 * Clears the config.
 	 */
 	public function clear() {
