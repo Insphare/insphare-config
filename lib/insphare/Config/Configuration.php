@@ -12,6 +12,7 @@ class Configuration {
 	const ENVIRONMENT_ALPHA = 'alpha';
 	const ENVIRONMENT_BETA = 'beta';
 	const ENVIRONMENT_TESTING = 'testing';
+	const ENVIRONMENT_UNIT_TESTING = 'unittesting';
 	const ENVIRONMENT_STABLE = 'stable';
 
 	/**
@@ -91,6 +92,7 @@ class Configuration {
 		self::ENVIRONMENT_DEV,
 		self::ENVIRONMENT_TESTING,
 		self::ENVIRONMENT_STABLE,
+		self::ENVIRONMENT_UNIT_TESTING,
 	];
 
 	/**
