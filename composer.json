@@ -18,7 +18,7 @@
     ],
    "minimum-stability": "dev",
    "require": {
-       "symfony/yaml": "5.4.10",
+     "symfony/yaml": "4.4.43",
        "insphare/base": "*"
     },
     "autoload": {
