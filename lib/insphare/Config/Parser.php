@@ -54,7 +54,7 @@ class Parser {
 
 		/** @var \SplFileInfo $splFile */
 		foreach ($files as $splFile) {
-			$parsed = (array)Yaml::parse((string)$splFile);
+			$parsed = (array)Yaml::parse(file_get_contents((string)$splFile));
 			$this->clearNotNeededEnvironments($parsed);
 
 			// overwrite the environment
